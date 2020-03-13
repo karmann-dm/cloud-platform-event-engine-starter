@@ -1,10 +1,7 @@
 package com.karmanno.cloudplatform.events;
 
-import lombok.RequiredArgsConstructor;
-
 import java.util.Map;
 
-@RequiredArgsConstructor
 public class EventPublishContainer {
     private Map<Class<?>, EventPublisher> transferEventPublisherMap;
 
