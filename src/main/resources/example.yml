@@ -1,0 +1,4 @@
+events:
+  topics:
+    CREATE_ACCOUNT: com.karmanno.accounts.AccountRequest
+    ACCOUNT_CREATED: com.karmanno.accounts.Account
