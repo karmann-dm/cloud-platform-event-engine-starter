@@ -19,7 +19,7 @@ public class EventPublishConfigurer {
 
     public void configure(EventPublishContainer container) {
         eventsProperties.getTopics().forEach((topic, cls) -> {
-            if (!cls.isAssignableFrom(Event.class))
+            if (!Event.class.isAssignableFrom(cls))
                 throw new RuntimeException("Class " + cls + " does not implement Event class");
             container.insertPublisher(cls, event -> {
                         try {
