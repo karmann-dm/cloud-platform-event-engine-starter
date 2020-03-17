@@ -48,8 +48,6 @@ public class EventsBeanDefinitionRegistryPostProcessor implements BeanDefinition
 
         GenericBeanDefinition containerBeanDefinition = new GenericBeanDefinition();
         containerBeanDefinition.setBeanClass(EventPublisherContainer.class);
-        containerBeanDefinition.setFactoryBeanName(EventsConfiguration.PUBLISHER_CONTAINER_FACTORY_NAME);
-        containerBeanDefinition.setFactoryMethodName(FACTORY_METHOD_NAME);
 
         registry.registerBeanDefinition("eventPusherContainer", containerBeanDefinition);
     }
