@@ -1,27 +1,58 @@
 package com.karmanno.cloudplatform.events;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
+import java.util.List;
 import java.util.Map;
 
-@ConfigurationProperties(prefix = "events")
 public class EventsProperties {
-    private String kafkaBootstrapServers;
-    private Map<String, Class<?>> topics;
 
-    public String getKafkaBootstrapServers() {
-        return kafkaBootstrapServers;
+    public static class ListenEntry {
+        private Class<?> event;
+        private Class<?> listener;
+
+        public Class<?> getEvent() {
+            return event;
+        }
+
+        public void setEvent(Class<?> event) {
+            this.event = event;
+        }
+
+        public Class<?> getListener() {
+            return listener;
+        }
+
+        public void setListener(Class<?> listener) {
+            this.listener = listener;
+        }
     }
 
-    public void setKafkaBootstrapServers(String kafkaBootstrapServers) {
-        this.kafkaBootstrapServers = kafkaBootstrapServers;
+    private Boolean enabled;
+    private Map<String, Class<?>> publish;
+    private Map<String, List<ListenEntry>> listen;
+
+
+    public Map<String, Class<?>> getPublish() {
+        return publish;
     }
 
-    public Map<String, Class<?>> getTopics() {
-        return topics;
+    public void setPublish(Map<String, Class<?>> publish) {
+        this.publish = publish;
     }
 
-    public void setTopics(Map<String, Class<?>> topics) {
-        this.topics = topics;
+    public Map<String, List<ListenEntry>> getListen() {
+        return listen;
     }
+
+    public void setListen(Map<String, List<ListenEntry>> listen) {
+        this.listen = listen;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
 }

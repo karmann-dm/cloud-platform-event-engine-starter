@@ -1,4 +1,11 @@
 events:
-  topics:
+  enabled: true
+  publish:
     CREATE_ACCOUNT: com.karmanno.accounts.AccountRequest
-    ACCOUNT_CREATED: com.karmanno.accounts.Account
+  listen:
+    ACCOUNT_REQUEST_CONFIRMED:
+      - event: com.karmanno.accounts.RequestConfirmed
+        listener: com.karmanno.account.RequestConfirmedListener
+    ACCOUNT_REQUEST_ERROR:
+      - event: com.karmanno.accounts.RequestError
+        listener: com.karmanno.account.RequestErrorListener

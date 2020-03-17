@@ -1,9 +1,12 @@
 package com.karmanno.cloudplatform.events;
 
 import java.time.LocalDateTime;
+import java.util.function.Supplier;
 
 public interface Event{
     String getId();
+    String getEmitter();
     LocalDateTime getTimestamp();
-    Object getPayload();
+
+    Supplier<String> getRepresentation();
 }
