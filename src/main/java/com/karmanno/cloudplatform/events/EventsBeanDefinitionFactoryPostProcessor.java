@@ -49,7 +49,7 @@ public class EventsBeanDefinitionFactoryPostProcessor implements BeanDefinitionR
 
         GenericBeanDefinition containerBeanDefinition = new GenericBeanDefinition();
         containerBeanDefinition.setBeanClass(EventPublisherContainer.class);
-        containerBeanDefinition.setDependsOn((String[]) publisherNames.toArray());
+        containerBeanDefinition.setDependsOn(publisherNames.toArray(new String[0]));
 
         registry.registerBeanDefinition("eventPusherContainer", containerBeanDefinition);
     }
