@@ -10,7 +10,7 @@ import java.util.Map;
 public class EventsBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        EventPublisherContainer container = beanFactory.getBean(EventPublisherContainer.class);
+        EventPublisherContainer container = (EventPublisherContainer) beanFactory.getBean("eventPusherContainer");
         Map<String, EventPublisher> configuredPublishers = beanFactory.getBeansOfType(EventPublisher.class);
         container.setEventPublishers(new ArrayList<>(configuredPublishers.values()));
     }
