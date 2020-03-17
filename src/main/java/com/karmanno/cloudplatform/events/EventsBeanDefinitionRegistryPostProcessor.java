@@ -12,6 +12,7 @@ import org.springframework.core.env.Environment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class EventsBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
     private static final String FACTORY_METHOD_NAME = "create";
@@ -54,5 +55,10 @@ public class EventsBeanDefinitionRegistryPostProcessor implements BeanDefinition
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+        if (beanFactory.containsBean("eventPusherContainer")) {
+            EventPublisherContainer container = (EventPublisherContainer) beanFactory.getBean("eventPusherContainer");
+            Map<String, EventPublisher> configuredPublishers = beanFactory.getBeansOfType(EventPublisher.class);
+            container.setEventPublishers(new ArrayList<>(configuredPublishers.values()));
+        }
     }
 }

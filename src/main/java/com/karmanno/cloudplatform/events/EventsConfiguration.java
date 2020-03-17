@@ -19,11 +19,6 @@ public class EventsConfiguration {
         return new EventsBeanDefinitionRegistryPostProcessor(environment);
     }
 
-    @Bean
-    public EventsBeanFactoryPostProcessor eventsBeanFactoryPostProcessor() {
-        return new EventsBeanFactoryPostProcessor();
-    }
-
     @Bean(name = PUBLISHER_BEAN_FACTORY_NAME)
     public EventPublisherBeanFactory publisherFactory(KafkaTemplate<String, String> kafkaTemplate,
                                                       ObjectMapper objectMapper) {
