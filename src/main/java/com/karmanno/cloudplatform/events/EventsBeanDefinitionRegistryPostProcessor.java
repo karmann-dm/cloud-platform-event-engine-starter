@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventsBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
-    private static final String PUBLISHER_FACTORY_NAME = "publisherFactory";
     private static final String FACTORY_METHOD_NAME = "create";
 
     private EventsProperties eventsProperties;
@@ -34,7 +33,7 @@ public class EventsBeanDefinitionRegistryPostProcessor implements BeanDefinition
         eventsProperties.getPublish().forEach((topic, eventClass) -> {
             GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
             beanDefinition.setBeanClass(EventPublisher.class);
-            beanDefinition.setFactoryBeanName(PUBLISHER_FACTORY_NAME);
+            beanDefinition.setFactoryBeanName(EventsConfiguration.PUBLISHER_BEAN_FACTORY_NAME);
             beanDefinition.setFactoryMethodName(FACTORY_METHOD_NAME);
 
             ConstructorArgumentValues constructorArgumentValues = beanDefinition.getConstructorArgumentValues();
@@ -50,6 +49,9 @@ public class EventsBeanDefinitionRegistryPostProcessor implements BeanDefinition
         GenericBeanDefinition containerBeanDefinition = new GenericBeanDefinition();
         containerBeanDefinition.setBeanClass(EventPublisherContainer.class);
         containerBeanDefinition.setDependsOn(publisherNames.toArray(new String[0]));
+
+        containerBeanDefinition.setFactoryBeanName(EventsConfiguration.PUBLISHER_CONTAINER_FACTORY_NAME);
+        containerBeanDefinition.setFactoryMethodName(FACTORY_METHOD_NAME);
 
         registry.registerBeanDefinition("eventPusherContainer", containerBeanDefinition);
     }

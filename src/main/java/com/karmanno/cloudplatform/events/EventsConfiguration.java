@@ -14,6 +14,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 @ConditionalOnProperty(value = "events.enabled", havingValue = "true")
 public class EventsConfiguration {
     public static final String PUBLISHER_BEAN_FACTORY_NAME = "publisherFactory";
+    public static final String PUBLISHER_CONTAINER_FACTORY_NAME = "eventPublisherContainerFactory";
 
     @Bean
     public EventsBeanDefinitionRegistryPostProcessor eventsBeanDefinitionFactoryPostProcessor(Environment environment) {
@@ -29,5 +30,10 @@ public class EventsConfiguration {
     public EventPublisherBeanFactory publisherFactory(KafkaTemplate<String, String> kafkaTemplate,
                                                       ObjectMapper objectMapper) {
         return new EventPublisherBeanFactory(kafkaTemplate, objectMapper);
+    }
+
+    @Bean(name = PUBLISHER_CONTAINER_FACTORY_NAME)
+    public EventPublisherContainerBeanFactory eventPublisherContainerFactory() {
+        return new EventPublisherContainerBeanFactory();
     }
 }
