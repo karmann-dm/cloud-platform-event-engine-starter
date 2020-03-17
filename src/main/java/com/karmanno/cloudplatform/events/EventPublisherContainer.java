@@ -3,9 +3,9 @@ package com.karmanno.cloudplatform.events;
 import java.util.List;
 
 public class EventPublisherContainer {
-    private final List<EventPublisher> eventPublishers;
+    private List<EventPublisher> eventPublishers;
 
-    public EventPublisherContainer(List<EventPublisher> eventPublishers) {
+    public void setEventPublishers(List<EventPublisher> eventPublishers) {
         this.eventPublishers = eventPublishers;
     }
 

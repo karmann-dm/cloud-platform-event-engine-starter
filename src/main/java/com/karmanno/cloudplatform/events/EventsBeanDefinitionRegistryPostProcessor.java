@@ -13,13 +13,13 @@ import org.springframework.core.env.Environment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventsBeanDefinitionFactoryPostProcessor implements BeanDefinitionRegistryPostProcessor {
+public class EventsBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
     private static final String PUBLISHER_FACTORY_NAME = "publisherFactory";
     private static final String FACTORY_METHOD_NAME = "create";
 
     private EventsProperties eventsProperties;
 
-    public EventsBeanDefinitionFactoryPostProcessor(Environment environment) {
+    public EventsBeanDefinitionRegistryPostProcessor(Environment environment) {
         eventsProperties = Binder.get(environment)
                 .bind("events", Bindable.of(EventsProperties.class))
                 .orElseThrow(() -> new RuntimeException("Can't bind events properties to class " +
