@@ -49,15 +49,17 @@ public class EventsBeanDefinitionRegistryPostProcessor implements BeanDefinition
 
         GenericBeanDefinition containerBeanDefinition = new GenericBeanDefinition();
         containerBeanDefinition.setBeanClass(EventPublisherContainer.class);
-        containerBeanDefinition.setDependsOn(publisherNames.toArray(new String[0]));
+        containerBeanDefinition.setFactoryBeanName(EventsConfiguration.PUBLISHER_CONTAINER_BEAN_FACTORY_NAME);
+        containerBeanDefinition.setFactoryMethodName(FACTORY_METHOD_NAME);
 
-        registry.registerBeanDefinition("eventPusherContainer", containerBeanDefinition);
+        registry.registerBeanDefinition("eventPublisherContainer", containerBeanDefinition);
     }
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        if (beanFactory.containsBean("eventPusherContainer")) {
-            EventPublisherContainer container = (EventPublisherContainer) beanFactory.getBean("eventPusherContainer");
+        if (beanFactory.containsBean("eventPublisherContainer")) {
+            EventPublisherContainer container =
+                    (EventPublisherContainer) beanFactory.getBean("eventPublisherContainer");
             Map<String, EventPublisher> configuredPublishers = beanFactory.getBeansOfType(EventPublisher.class);
             container.setEventPublishers(new ArrayList<>(configuredPublishers.values()));
         }

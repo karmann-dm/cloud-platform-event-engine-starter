@@ -5,10 +5,6 @@ import java.util.List;
 public class EventPublisherContainer {
     private List<EventPublisher> eventPublishers;
 
-    public EventPublisherContainer(List<EventPublisher> eventPublishers) {
-        this.eventPublishers = eventPublishers;
-    }
-
     public void setEventPublishers(List<EventPublisher> eventPublishers) {
         this.eventPublishers = eventPublishers;
     }
