@@ -20,7 +20,7 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
     - name: Build with Gradle
-      run: ./gradlew build
+      run: gradle build
 
     - name: Publish to GitHub Packages
-      run: ./gradlew publish -Pusername=${{ github.actor }} -Ptoken=${{ secrets.GITHUB_TOKEN }} --stacktrace
+      run: gradle publish -Pusername=${{ github.actor }} -Ptoken=${{ secrets.GITHUB_TOKEN }} --stacktrace
