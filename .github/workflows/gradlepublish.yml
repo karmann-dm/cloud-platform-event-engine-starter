@@ -23,4 +23,7 @@ jobs:
       run: gradle build
 
     - name: Publish to GitHub Packages
-      run: gradle publish -Pusername=${{ github.actor }} -Ptoken=${{ secrets.GITHUB_TOKEN }} --stacktrace
+      run: gradle publish --stacktrace
+      env:
+        username: ${{ github.actor }}
+        token: ${{ secrets.GITHUB_TOKEN }}
