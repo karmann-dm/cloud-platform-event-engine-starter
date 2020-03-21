@@ -5,31 +5,9 @@ import java.util.Map;
 
 public class EventsProperties {
 
-    public static class ListenEntry {
-        private Class<?> event;
-        private Class<?> listener;
-
-        public Class<?> getEvent() {
-            return event;
-        }
-
-        public void setEvent(Class<?> event) {
-            this.event = event;
-        }
-
-        public Class<?> getListener() {
-            return listener;
-        }
-
-        public void setListener(Class<?> listener) {
-            this.listener = listener;
-        }
-    }
-
     private Boolean enabled;
     private Map<String, Class<?>> publish;
-    private Map<String, List<ListenEntry>> listen;
-
+    private String kafkaServer;
 
     public Map<String, Class<?>> getPublish() {
         return publish;
@@ -37,14 +15,6 @@ public class EventsProperties {
 
     public void setPublish(Map<String, Class<?>> publish) {
         this.publish = publish;
-    }
-
-    public Map<String, List<ListenEntry>> getListen() {
-        return listen;
-    }
-
-    public void setListen(Map<String, List<ListenEntry>> listen) {
-        this.listen = listen;
     }
 
     public Boolean getEnabled() {
@@ -55,4 +25,11 @@ public class EventsProperties {
         this.enabled = enabled;
     }
 
+    public String getKafkaServer() {
+        return kafkaServer;
+    }
+
+    public void setKafkaServer(String kafkaServer) {
+        this.kafkaServer = kafkaServer;
+    }
 }
