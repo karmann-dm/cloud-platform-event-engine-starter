@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.karmanno'
-version '1.2.11'
+version '1.2.12'
 
 repositories {
     mavenCentral()
@@ -29,8 +29,8 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/karmann-dm/cloud-platform-event-engine-starter")
             credentials {
-                username = System.getenv("githubUsername")
-                password = System.getenv("githubToken")
+                username = System.getenv("username")
+                password = System.getenv("token")
             }
         }
     }
