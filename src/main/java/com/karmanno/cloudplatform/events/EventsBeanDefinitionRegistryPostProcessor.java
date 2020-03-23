@@ -32,8 +32,6 @@ public class EventsBeanDefinitionRegistryPostProcessor implements BeanDefinition
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
         GenericBeanDefinition containerBeanDefinition = new GenericBeanDefinition();
         containerBeanDefinition.setBeanClass(EventPublisherContainer.class);
-        containerBeanDefinition.setFactoryBeanName(EventsConfiguration.PUBLISHER_CONTAINER_BEAN_FACTORY_NAME);
-        containerBeanDefinition.setFactoryMethodName(FACTORY_METHOD_NAME);
         registry.registerBeanDefinition(EVENT_PUBLISHER_CONTAINER_BEAN_NAME, containerBeanDefinition);
 
         eventsProperties.getPublish().forEach((topic, eventClass) -> {
