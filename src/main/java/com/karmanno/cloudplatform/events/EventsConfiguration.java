@@ -6,6 +6,7 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -45,6 +46,13 @@ public class EventsConfiguration {
     @Bean
     public EventsBeanDefinitionRegistryPostProcessor eventsBeanDefinitionFactoryPostProcessor(Environment environment) {
         return new EventsBeanDefinitionRegistryPostProcessor(environment);
+    }
+
+    @Bean
+    public EventPublisherBeanPostProcessor eventPublisherBeanPostProcessor(ApplicationContext applicationContext) {
+        EventPublisherBeanPostProcessor eventPublisherBeanPostProcessor = new EventPublisherBeanPostProcessor();
+        eventPublisherBeanPostProcessor.setApplicationContext(applicationContext);
+        return eventPublisherBeanPostProcessor;
     }
 
     @Bean(name = PUBLISHER_BEAN_FACTORY_NAME)

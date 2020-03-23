@@ -29,8 +29,6 @@ public class EventsBeanDefinitionRegistryPostProcessor implements BeanDefinition
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
-        List<String> publisherNames = new ArrayList<>();
-
         eventsProperties.getPublish().forEach((topic, eventClass) -> {
             GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
             beanDefinition.setBeanClass(EventPublisher.class);
@@ -42,7 +40,6 @@ public class EventsBeanDefinitionRegistryPostProcessor implements BeanDefinition
             constructorArgumentValues.addIndexedArgumentValue(1, topic);
 
             String beanName = topic + "_bean";
-            publisherNames.add(beanName);
 
             registry.registerBeanDefinition(beanName, beanDefinition);
         });
@@ -57,11 +54,6 @@ public class EventsBeanDefinitionRegistryPostProcessor implements BeanDefinition
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        if (beanFactory.containsBean("eventPublisherContainer")) {
-            EventPublisherContainer container =
-                    (EventPublisherContainer) beanFactory.getBean("eventPublisherContainer");
-            Map<String, EventPublisher> configuredPublishers = beanFactory.getBeansOfType(EventPublisher.class);
-            container.setEventPublishers(new ArrayList<>(configuredPublishers.values()));
-        }
+
     }
 }
