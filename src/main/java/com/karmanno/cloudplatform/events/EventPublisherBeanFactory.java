@@ -75,6 +75,8 @@ public class EventPublisherBeanFactory {
             @Override
             public void publish(Event event) {
                 try {
+                    logger.info("Sending event " + event.getId() + " Representation = {"
+                            + event.getRepresentation() + "} Topic: " + topic);
                     kafkaTemplate.send(topic, objectMapper.writeValueAsString(
                             new EventTransfer(
                                     event.getId(),
@@ -83,6 +85,7 @@ public class EventPublisherBeanFactory {
                                     event.getRepresentation().get()
                             )
                     ));
+                    logger.info("Event with id = " + event.getId() + " has been sent");
                 } catch (Exception e) {
                     logger.error("Error while sending event to Kafka", e);
                 }
